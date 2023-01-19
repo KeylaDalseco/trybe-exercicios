@@ -1,0 +1,15 @@
+.title,.title2 {
+    text-align: center;
+}
+li:hover {
+    background-color: aqua;
+    
+}
+li:active {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color: purple;
+
+}
+li {
+    list-style: none;
+}
