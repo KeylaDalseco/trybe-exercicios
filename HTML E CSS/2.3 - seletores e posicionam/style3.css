@@ -1,0 +1,44 @@
+  div:hover {
+    border: 3px solid black;
+
+}
+div:nth-of-type(1) {
+    background-color: red;
+  }
+  div:nth-of-type(2) {
+    background-color: green;
+  }
+  div:nth-of-type(3) {
+    background-color: yellow;
+  }
+  div:nth-of-type(4) {
+    background-color: grey;
+  }
+  div:nth-of-type(5) {
+    background-color: lightblue;
+  }
+
+  div:nth-of-type(1) > h3 {
+    color: rgb(99, 29, 99);
+  }
+  /*Aqui estamos pegando a segunda div e o primeiro h3 e assim por diante nas próximas div */
+  div:nth-of-type(2) > h3 {
+    color: rgb(126, 212, 85) 
+  }
+  div:nth-of-type(3) > h3 {
+    font-size: 20px;
+  }
+  div:nth-of-type(4) > h3 {
+    font-family: monospace;
+  }
+  div:nth-of-type(5) > h3 {
+    font-style: italic
+  }
+  /* Faça a terceira div ser maior que as demais. */
+  div:nth-of-type(3) {
+    height: 100px;
+  }
+  /* Deixe as tags ímpares <h3> com o texto em itálico. */
+  div:nth-child(odd) h3 {
+    font-style: italic
+  }
