@@ -7,9 +7,9 @@
 */
 
 
-const num1 = 2;
-const num2 = 10;
-const soma = num1 + num2
+let num1 = 2;
+let num2 = 10;
+let soma = num1 + num2
 
 
 if (num1 === num2) {
@@ -17,3 +17,11 @@ if (num1 === num2) {
 } else (num1 !== num2); {
     console.log (num1 * num2)
 }
+
+/* ou pode - se usar
+let result;
+if(num1 == num2) {
+    result = num1 + num2;
+ } else {
+    result = num1 * num2;
+ } */
