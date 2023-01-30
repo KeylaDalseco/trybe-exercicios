@@ -21,6 +21,8 @@ let array = ['java', 'javascript', 'python', 'html', 'css'];
 let maiorPalavra = 0;
 
 for (let index = 0; index < array.length; index+=1) {
-    maiorPalavra += array.length;
+    if (array.length[index] > maiorPalavra) {
+        array.length = maiorPalavra
+    }
     console.log(maiorPalavra);
 }
