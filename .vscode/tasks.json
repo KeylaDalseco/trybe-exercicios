@@ -1,0 +1,13 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "cy:browser",
+			"path": "5 -  HTML e CSS: Forms, Flexbox e Responsivo/5.1 -  HTML e CSS: Forms/sd-030-a-exercise-travel-form",
+			"problemMatcher": [],
+			"label": "npm: cy:browser - 5 -  HTML e CSS: Forms, Flexbox e Responsivo/5.1 -  HTML e CSS: Forms/sd-030-a-exercise-travel-form",
+			"detail": "cypress run --headless --browser chrome"
+		}
+	]
+}
