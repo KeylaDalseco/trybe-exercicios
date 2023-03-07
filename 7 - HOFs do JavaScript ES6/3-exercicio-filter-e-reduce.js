@@ -25,10 +25,10 @@ console.log(maiorVinte);
 // ============== REDUCE() ========= 
 
 const valorItens = [1, 32, 44, 2, 3];
-// valorItens.reduce((acc, curr) => {
-//   console.log(`acumulador - acc:`, acc);
-//   console.log(`valorAtual - curr:`, curr);
-// }, 0);
+valorItens.reduce((acc, curr) => {
+  console.log(`acumulador - acc:`, acc);
+  console.log(`valorAtual - curr:`, curr);
+}, 0);
 
 valorItens.reduce((acc, curr) => {
   console.log(`valor atual é ${curr}`);
@@ -44,7 +44,6 @@ valorItens.reduce((acc, curr) => {
   return acc + curr; // Ao fim das iterações podemos ver que o `acc` armazenou o resultado total do retorno da função.
 });
 
-
 // Exemplo 2
 const numbers = [1, 32, 44, 2, 3];
 
@@ -53,3 +52,14 @@ const sumNumbers =  (acc, curr) => acc + curr;
 const totalSum = numbers.reduce(sumNumbers, 30); // aqui inicia com 30 a soma
 
 console.log(totalSum); //112
+
+// Exemplo 3
+
+const numbers1 = [18, 19, 23, 53, 4, 5, 76, 23, 54];
+
+const isEven = (number) => number % 2 === 0;
+const sum = (accumulator, number) => accumulator + number;
+
+const sumNumbers1 = (array) => array.filter(isEven).reduce(sum); // Olhe que código pequeno e conciso!
+
+console.log(sumNumbers1(numbers1)); // 152
