@@ -78,6 +78,18 @@ const getPosition = (latitude, longitude) => ({
 
 console.log(getPosition(-19.8157, -43.9542));
 
+// outro método seria
+
+const createSUperHero = (name, superHero, nickname, powers) => {
+    return { name,
+    superHero,
+    nickname,
+    powers
+  }
+}
+
+console.log(createSUperHero('keyla', 'Costa', 'Dalseco', 'reclamação'));
+
 
 // ============= exercicio de fixação de Default Parameters ==========
 
