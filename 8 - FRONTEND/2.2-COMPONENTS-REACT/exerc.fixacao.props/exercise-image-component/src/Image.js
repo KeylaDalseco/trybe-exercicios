@@ -1,4 +1,4 @@
-import { Component } from "react"; // outra forma de fazer
+import React, { Component } from "react"; // outra forma de fazer
 
 // class Image extends React.Component {
  // modo tradicional de fazer
