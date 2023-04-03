@@ -126,8 +126,8 @@ class Table extends Component {
     return (
       users.map(user => {  // Já havia sido criado uma props nesses components
         <div>
-          <UserName name={user.name}/>       // const name = this.props.name
-          <UserInfo email={user.email}/>     // const {email, id} = this.props
+          <UserName name={user.name}/>       {/* const name = this.props.name */}
+          <UserInfo email={user.email}/>     {/* const {email, id} = this.props */}
         </div>
       })
     )
