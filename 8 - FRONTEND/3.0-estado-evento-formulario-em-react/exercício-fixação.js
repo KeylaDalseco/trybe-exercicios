@@ -3,42 +3,43 @@
 import React from 'react'
 
 
-class Buttons extends React.Component {
-    constructor() {
-        super()
-        // A função abaixo vincula "manualmente" o `this` à nossa função
-        // this.btn1 = this.btn1.bind(this)
-        this.btn2 = this.btn2.bind(this)
-        this.btn3 = this.btn3.bind(this) // SE USAR FUNCTION DEVE SER FEITO O CONSTRUCTOR E BIND
-        this.state = {
-            numeroDeCliques: 0
-        }
-        
-      }
-    // SE VC USAR ARROW FUNCTION NÃO PRECISA DE BIND E NEM CONSTRUCTOR
-    btn1 = () => {
-        console.log(this)
-        console.log("cliquei no 1° botão")
-    }
-    
-    btn2 () {
-        console.log("cliquei no 2° botão")
-        console.log(this)
-    }
-    
-    btn3 () {
-        console.log("cliquei no 3° botão")
-        console.log(this)
-    }
-    render() {
-        return(
-            <div>
-                <button onClick={ this.btn1 }>Botão 1</button>
-                <button onClick={ this.btn2 }>Botão 2</button>
-                <button onClick={ this.btn3 }>Botão 3</button>
-            </div>
-        )
-    }
-}
+// ==================== EXEMPLO DO COURSE =========== 
 
-export default Buttons;
+
+class App extends React.Component {
+    constructor() {
+      super();
+      // Removemos a declaração do estado de dentro do construtor
+      // this.state = {
+      //   numeroDeCliques: 0,
+      // };
+  
+      this.handleClick = this.handleClick.bind(this); // Aqui é uma function, deve ser usado o this e bind
+    }
+  
+    // Fazemos a definição do estado utilizando a sintaxe Public Class Field
+    state = {
+      numeroDeCliques: 0,
+    };
+  
+    handleClick() {
+      this.setState((estadoAnterior, _props) => ({
+        numeroDeCliques: estadoAnterior.numeroDeCliques + 1,
+      }));
+  
+      // ou 
+  
+      // numeroDeCliques: this.state.numeroDeCliques + 1
+    }
+  
+    render() {
+      const { numeroDeCliques } = this.state;
+      return (
+        <button type="button" onClick={ this.handleClick }>
+          { numeroDeCliques }
+        </button>
+      );
+    }
+  }
+
+export default App
