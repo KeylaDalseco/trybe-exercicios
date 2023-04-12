@@ -8,6 +8,15 @@
 			"problemMatcher": [],
 			"label": "npm: cy:browser - 5 -  HTML e CSS: Forms, Flexbox e Responsivo/5.1 -  HTML e CSS: Forms/sd-030-a-exercise-travel-form",
 			"detail": "cypress run --headless --browser chrome"
+		},
+		{
+			"type": "npm",
+			"script": "build",
+			"path": "8 - FRONTEND/3.0-estado-evento-formulario-em-react/repositorio-atividade-3.1/sd-030-a-exercise-pokedex-state",
+			"group": "build",
+			"problemMatcher": [],
+			"label": "npm: build - 8 - FRONTEND/3.0-estado-evento-formulario-em-react/repositorio-atividade-3.1/sd-030-a-exercise-pokedex-state",
+			"detail": "react-scripts build"
 		}
 	]
 }
