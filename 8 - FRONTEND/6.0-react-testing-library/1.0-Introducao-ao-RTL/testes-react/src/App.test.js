@@ -120,3 +120,34 @@ describe('Testando a aplicação, testando botão, e sua funcionalidade', () => 
     expect(input).toHaveValue('');
   });
 });
+
+describe('Teste do campo de input', () => {
+  test('Testando a adição de vários itens a aplicação', () => {
+    const listTodo = ['Realizar CR', 'Ler Post no Medium', 'Beber água']; // Use esse array como base para realizar os testes.
+    render(<App />); // Caso precise de uma nova query adicione no object destructuring
+    const button = screen.getByRole('button', { name: /Adicionar/i });
+    const inputTask = screen.getByLabelText('Tarefa:');
+    expect(button).toBeDefined();
+
+    // Temos que testar o input e depois o botão. Pense como o usuário:
+    // ele digitou no input todos esse elementos e depoisde clicar os adicionou
+    // da erro - > userEvent.type(inputTask, listTodo.forEach((lista) => lista));
+
+    listTodo.forEach((task) => {
+      userEvent.type(inputTask, task);
+      userEvent.click(button);
+    });
+
+    listTodo.forEach((lista) => {
+      const listaDeTarefa = screen.getByText(lista);
+      expect(listaDeTarefa).toBeInTheDocument();
+    });
+  });
+});
+
+describe('Teste do componente Item', () => {
+  test('Ao receber uma string como prop ela precisa aparecer na tela', () => {
+    // render(<Item content="Limpar a casa" />);
+    expect(screen.getByText('Limpar a casa')).toBeInTheDocument();
+  });
+});
