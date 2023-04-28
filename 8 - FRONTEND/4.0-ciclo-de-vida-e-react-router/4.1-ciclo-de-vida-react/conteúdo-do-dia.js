@@ -11,7 +11,7 @@ fetchCharacters(); {
   })
 }
 
-componentDidMount(); {
+componentDidMount(); { // É UTILIZADO NO MOMENTO EM QUE O COMPONENT É MONTADO, O PRIMEIRO APÓS O RENDER
   this.fetchCharacters();
 }
 
@@ -23,3 +23,13 @@ componentDidMount(); {
     this.setState({characters: data.results})
   })
 }
+
+// É UM BOLEANO QUE PERMITE A ATUALIZAÇÃO OU NÃO, OCORRE ANTES QUE O componentDidUpdate(), E DEPOIS DO componentDidMount()
+shouldComponentUpdate()
+
+// É ATIVADO TODA VEZ QUE ATUALIZO MEU ESTADO NO SETSTATE E PROPS, APOŚ PASSAR PELO DE CIMA
+componentDidUpdate() 
+
+// É ATIVADO QUANDO É NECESSÁRIO DESMONTAR O COMPONENT (QUANDO O TIMER DE UMA PROVA ACABAR POR EXEMPLO)
+
+componentWillUnmount()
