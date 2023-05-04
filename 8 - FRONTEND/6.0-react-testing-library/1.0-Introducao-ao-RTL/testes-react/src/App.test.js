@@ -39,11 +39,11 @@ test('Verificando se o botão e o campo email estão funcionando.', async () => 
 
   // interajo com os elementos
   userEvent.type(inputEmail, EMAIL_USER);
-  userEvent.click(btnSend);
   
   // faço os testes
   expect(textEmail).toBeInTheDocument();
   expect(textEmail).toHaveTextContent('Valor:');
+  userEvent.click(btnSend);
   expect(inputEmail).toHaveValue('');
   expect(textEmail).toHaveTextContent(`Valor: ${ EMAIL_USER }`);
 });
