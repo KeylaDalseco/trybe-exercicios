@@ -30,6 +30,7 @@ class Cars extends React.Component {
             className={ blueCar ? 'car-right' : 'car-left' }
             src={ carBlue }
             alt="blue car"
+            onClick={ () => dispatch(moveCarAction('blue', !blueCar)) }
           />
           <button type="button">move</button>
         </div>
@@ -38,6 +39,7 @@ class Cars extends React.Component {
             className={ yellowCar ? 'car-right' : 'car-left' }
             src={ carYellow }
             alt="yellow car"
+            onClick={ () => dispatch(moveCarAction('yellow', !yellowCar)) }
           />
           <button type="button">move</button>
         </div>
@@ -47,7 +49,9 @@ class Cars extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-
+  redCar: state.cars.red,
+  blueCar: state.cars.blue,
+  yellowCar: state.cars.yellow,
 });
 
 Cars.propTypes = {
