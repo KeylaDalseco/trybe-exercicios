@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux';
 import { actionCreator } from './redux/actions/actionCreator';
 import { clicksCount } from './redux/actions/actionCreator';
+import './App.css'
 
 class App extends React.Component{
   render() {
@@ -13,7 +14,7 @@ class App extends React.Component{
     };
 
     return(
-      <div>
+      <div className="container">
         <h1>Contador</h1>
         <h2>{ countState }</h2>
         <button onClick={ () => dispatchAll() }>Incrementar 1</button>

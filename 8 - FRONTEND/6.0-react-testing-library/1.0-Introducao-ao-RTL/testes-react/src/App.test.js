@@ -151,3 +151,127 @@ describe('Teste do componente Item', () => {
     expect(screen.getByText('Limpar a casa')).toBeInTheDocument();
   });
 });
+
+// ============================== TESTE DO PROJETO DE RTL ==========================
+
+describe('Testando o component About.js', () => {
+  test('Teste se a página contém as informações sobre a Pokédex', () => {
+    renderWithRouter(<About />);
+    screen.getByRole('heading', { name: /about pokédex/i, level: 2 });
+    screen.getByText(/this application simulates a pokédex, a digital encyclopedia containing all pokémon/i);
+    screen.getByText(/one can filter pokémon by type, and see more details for each one of them/i);
+    const img = screen.getByRole('img', { name: /pokédex/i });
+    const src = 'https://cdn2.bulbagarden.net/upload/thumb/8/86/Gen_I_Pok%C3%A9dex.png/800px-Gen_I_Pok%C3%A9dex.png';
+    expect(img).toHaveAttribute('src', src);
+  });
+});
+
+describe('Testando o component App.js', () => {
+  test('Testando os links de navegação da tela inicial no topo da aplicação', () => {
+    renderWithRouter(<App />);
+    screen.getByRole('link', { name: /home/i });
+    screen.getByRole('link', { name: /about/i });
+    screen.getByRole('link', { name: /favorite pokémon/i });
+  });
+  test('Testando se a aplicação é redirecionada para a página inicial, na URL / ao clicar no link Home', async () => {
+    const { history } = renderWithRouter(<App />);
+    const linkHome = screen.getByRole('link', { name: /home/i });
+    userEvent.click(linkHome);
+    await screen.findByRole('heading', { name: /encountered pokémon/i });
+    const { pathname } = history.location;
+    expect(pathname).toBe('/');
+  });
+  test('Testando se a aplicação é redirecionada para About, na URL /about ao clicar no link About', async () => {
+    const { history } = renderWithRouter(<App />);
+    const linkAbout = screen.getByRole('link', { name: /about/i });
+    userEvent.click(linkAbout);
+    await screen.findByRole('heading', { name: /about pokédex/i });
+    const { pathname } = history.location;
+    expect(pathname).toBe('/about');
+  });
+  test('Testando se a aplicação é redirecionada para Pokémon Favoritados, na URL /favorites ao clicar no Favorite Pokémon', async () => {
+    const { history } = renderWithRouter(<App />);
+    const linkFavorite = screen.getByRole('link', { name: /Favorite/i });
+    userEvent.click(linkFavorite);
+    await screen.findByRole('link', { name: /favorite pokémon/i });
+    const { pathname } = history.location;
+    expect(pathname).toBe('/favorites');
+  });
+  test('Testando se a aplicação é redirecionada para a página Not Found ao entrar em uma URL desconhecida', () => {
+    const { history } = renderWithRouter(<App />);
+    act(() => {
+      history.push('/pagina/que-nao-existe/'); // deve ser importado da biblioteca react
+    });
+    screen.getByRole('heading', { name: /page requested not found/i });
+  });
+});
+
+//====================== TESTE COM IMAGEM CASO O SAPINHO NÃO ESTEJA FUNCIONANDO ======
+
+describe('Testando o component App.js', () => {
+  beforeEach(() => renderWithRouter(<App />));
+
+  test('Teste se é renderizado um card com as informações de determinado Pokémon', () => {
+    screen.getByText(/pikachu/i);
+    expect(screen.getByTestId('pokemon-type')).toHaveTextContent('Electric');
+    const peso = screen.getByText(/average weight: 6\.0 kg/i);
+    expect(peso).toHaveTextContent('Average weight: 6.0 kg');
+    const img = screen.getByRole('img', { name: /pikachu sprite/i });
+    const src = 'https://archives.bulbagarden.net/media/upload/b/b2/Spr_5b_025_m.png';
+    expect(img).toHaveAttribute('src', src);
+    expect(img).toHaveAttribute('alt', 'Pikachu sprite');
+  });
+  test('Teste se o card do Pokémon indicado na Pokédex contém um link de navegação para exibir detalhes deste Pokémon', async () => {
+    const { history } = renderWithRouter(<App />);
+    const linkDetails = await screen.findAllByRole('link', { name: /more details/i });
+    userEvent.click(linkDetails[0]);
+    act(() => { history.push('/pokemon/25'); });
+    const { pathname } = history.location;
+    expect(pathname).toBe('/pokemon/25');
+    
+  });
+  test('Teste se existe um ícone de estrela nos Pokémon favoritados', async () => {
+    const linkDetails = screen.getByRole('link', { name: /more details/i });
+    userEvent.click(linkDetails);
+    await screen.findByRole('heading', { name: /pikachu details/i });
+    await screen.findByText(/pokémon favoritado\?/i);
+    const checkbox = screen.getByRole('checkbox', { name: /pokémon favoritado\?/i });
+    userEvent.click(checkbox);
+    expect(checkbox).toBeChecked();
+    const favoriteImg = await screen.findByRole('img', { name: /pikachu is marked as favorite/i });
+    expect(favoriteImg).toHaveAttribute('src', '/star-icon.svg');
+    expect(favoriteImg).toHaveAttribute('alt', 'Pikachu is marked as favorite');
+  });
+});
+
+
+//=========================== TESTANDO CHECKBOX E ROTAS ======================
+
+describe('Testando o component FavoritePokemon.js', () => {
+  test('Teste se é exibida na tela a mensagem No favorite pokemon found', () => {
+    renderWithRouter(<FavoritePokemon />);
+    screen.getByText(/no favorite pokémon found/i);
+  });
+  test('Testando se apenas são exibidos os pokémons favoritados', async () => {
+    const { history } = renderWithRouter(<App />);
+
+    const linkDetails = screen.getByRole('link', { name: /more details/i });
+    userEvent.click(linkDetails);
+    await screen.findByRole('heading', { name: /pikachu details/i });
+    await screen.findByText(/pokémon favoritado\?/i);
+    const checkbox = screen.getByRole('checkbox', { name: /pokémon favoritado\?/i });
+    userEvent.click(checkbox);
+    expect(checkbox).toBeChecked();
+    const favorite = await screen.findByRole('img', { name: /pikachu is marked as favorite/i });
+    expect(favorite).toBeInTheDocument();
+    const linkFavorit = screen.getByRole('link', { name: /favorite pokémon/i });
+    userEvent.click(linkFavorit);
+    const { pathname } = history.location;
+    expect(pathname).toBe('/favorites');
+    screen.getByText(/pikachu/i);
+    screen.getByText(/electric/i);
+    screen.getByText(/average weight: 6\.0 kg/i);
+    await screen.findByRole('img', { name: /pikachu is marked as favorite/i });
+  });
+});
+
